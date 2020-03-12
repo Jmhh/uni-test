@@ -1,0 +1,21 @@
+
+.content {
+		text-align: center;
+		height: 400rpx;
+}
+.con_head{
+		height: 200rpx;
+		font-size: 50rpx;
+		background-color: #3b7aff;
+		color: #FFFFFF;
+}
+.logo{
+        height: 200rpx;
+        width: 200rpx;
+       /* margin-top: 200upx; */
+}
+.title {
+		font-size: 36rpx;
+		color: #8f8f94;
+}
+

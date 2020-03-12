@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/nc_list/index",
+    "pages/center/index",
+    "pages/card_desc/index",
+    "pages/card_edit/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "电子名片",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": " #F8F8F8",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3b7aff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/img/tab_bar/card1.png",
+        "selectedIconPath": "static/img/tab_bar/card_hover.png",
+        "text": "我的"
+      },
+      {
+        "pagePath": "pages/nc_list/index",
+        "iconPath": "static/img/tab_bar/card_list.png",
+        "selectedIconPath": "static/img/tab_bar/card_list_hover.png",
+        "text": "名片夹"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap15.json"
+}

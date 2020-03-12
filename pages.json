@@ -1,0 +1,94 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "名片",
+				"backgroundColor":"#F8F8F8"
+			}
+		},
+		{
+			"path": "pages/nc_list/index",
+			"style": {
+				"navigationBarTitleText": "名片夹",
+				"backgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/center/index",
+			"style": {
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "个人中心",
+				"navigationBarBackgroundColor": "#3b7aff",
+				"backgroundColor": "#3b7aff"
+			}
+		},
+		{
+			"path": "pages/card_desc/index",
+			"style": {
+				"navigationBarTitleText": "名片",
+				"backgroundColor": "#F8F8F8"
+			}
+		},
+		{
+			"path": "pages/card_edit/index",
+			"style": {
+				"navigationBarTitleText": "编辑",
+				"backgroundColor": "#F8F8F8"
+			}
+		}
+		// {
+		// 	"path": "pages/login/login",
+		// 	"style": {
+		// 		"navigationBarTitleText": "登录",
+		// 		"backgroundColor": "#F8F8F8"
+		// 	}
+		// }
+		// {
+		// 	"path": "pages/login/login",
+		// 	"style": {
+		// 		"navigationBarTextStyle": "black",
+		// 		"navigationBarTitleText": "登录认证",
+		// 		"navigationBarBackgroundColor": "#F8F8F8",
+		// 		"backgroundColor": "#F8F8F8"
+		// 	}
+		// }
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "电子名片",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": " #F8F8F8",
+		"backgroundTextStyle":"light"
+	},
+	"tabBar": {
+	        "color": "#7A7E83",
+	        "selectedColor": "#3b7aff",
+	        "borderStyle": "black",
+	        "backgroundColor": "#ffffff",
+			//"height": "80px",
+			// "fontSize": "10upx",
+			// "iconWidth": "24upx",
+			//"spacing": "5px",
+	        "list": [{
+					"pagePath": "pages/index/index",
+					"iconPath": "static/img/tab_bar/card1.png",
+					"selectedIconPath":"static/img/tab_bar/card_hover.png",
+					"text": "我的"
+				},{
+					"pagePath": "pages/nc_list/index",
+					"iconPath": "static/img/tab_bar/card_list.png",
+					"selectedIconPath": "static/img/tab_bar/card_list_hover.png",
+					"text": "名片夹"
+				}
+			]
+	        // "midButton": {
+	        //     "width": "80px",
+	        //     "height": "50px",
+	        //     "text": "文字",
+	        //     "iconPath": "static/logo.png",
+	        //    "iconWidth": "24px",
+	        //     "backgroundImage": "static/logo.png"
+	        // }
+	}
+}
