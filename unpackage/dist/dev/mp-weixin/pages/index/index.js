@@ -136,7 +136,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var tkiQrcode = function tkiQrcode() {return Promise.all(/*! import() | components/tki-qrcode/tki-qrcode */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/tki-qrcode/tki-qrcode")]).then(__webpack_require__.bind(null, /*! @/components/tki-qrcode/tki-qrcode.vue */ 64));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -231,6 +231,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+var _config = __webpack_require__(/*! ../../config.js */ 17);var tkiQrcode = function tkiQrcode() {return Promise.all(/*! import() | components/tki-qrcode/tki-qrcode */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/tki-qrcode/tki-qrcode")]).then(__webpack_require__.bind(null, /*! @/components/tki-qrcode/tki-qrcode.vue */ 64));};var _default =
 
 
 {
@@ -239,7 +242,8 @@ __webpack_require__.r(__webpack_exports__);
       page_title: '珠海大横琴科技发展有限公司',
       login_show: true,
       pers_card_msg: {},
-      bgImageURL: '' };
+      bgImageURL: '',
+      routerUrl: '' };
 
   },
   components: {
@@ -248,7 +252,6 @@ __webpack_require__.r(__webpack_exports__);
   onLoad: function onLoad(options) {
     uni.removeStorageSync('isCanUse');
     this.isLogin();
-    console.log(options);
     if (options.id) {
 
     } else {
@@ -256,6 +259,8 @@ __webpack_require__.r(__webpack_exports__);
       var nickName = uni.getStorageSync('nickName');
       //this.pers_card_msg=this.getLoginCardMsg(nickName)
     }
+    var pages = getCurrentPages();
+    this.routerUrl = _config.config.base_url + '/' + pages[0].route;
   },
   onShow: function onShow() {
     //this.getCardMsg();
@@ -508,8 +513,26 @@ __webpack_require__.r(__webpack_exports__);
       //获取相册授权
       var _this = this;
       this.$refs.qrcode._makeCode();
-      var pages = getCurrentPages();
-      console.log(pages);
+
+      // // 生成页面的二维码
+      // uni.request({
+      // 	//注意：下面的access_token值可以不可以直接复制使用，需要自己请求获取
+      // 	url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=31_W6Z19by4SH7EyRxX4Ez4WRLc-NtbtcjMmhfJkcfb_brBfwXwegZNhKXJdI6CbxcpL4YtZi0AZNKDwJdkgPVwRMMHm4kNTqNz6yHgOQGH5L9__iDMHSTe-TjUaAsQtspqM9kjmMgS3tHkHHc1GVLjAHAPEU',
+      // 	data: {
+      // 		scene: '000',
+      // 		page: "" //这里按照需求设置值和参数   
+      // 	},
+      // 	method: "POST",
+      // 	responseType: 'arraybuffer', //设置响应类型
+      // 	success(res) {
+      // 		console.log(res)
+      // 		var src2 = uni.arrayBufferToBase64(res.data); //对数据进行转换操作
+      // 		console.log(src2)
+      // 	},
+      // 	fail(e) {
+      // 		console.log(e)
+      // 	}
+      // })
       // uni.getSetting({
       // 	success(res) {
       // 	    if (!res.authSetting['scope.writePhotosAlbum']) {
@@ -528,6 +551,10 @@ __webpack_require__.r(__webpack_exports__);
       // 	   }
       // 	}
       // })
+    },
+    qrR: function qrR(res) {
+      console.log(res);
+      this.$refs.qrcode._saveCode();
     },
     saveImgToLocal: function saveImgToLocal(e) {
       if (!this.operFunOk()) {

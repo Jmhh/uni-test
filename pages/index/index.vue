@@ -9,8 +9,8 @@
 			</div>
 			<div class="con_card_body con_item_list">
 				<div class="card_con_body bgimg" :style="{background: 'url('+bgImageURL+') no-repeat'}">
-					<button v-if="login_show" class='bottom' type='primary' @click="login" open-type="getUserInfo" withCredentials="true" lang="zh_CN"
-					 @getuserinfo="wxGetUserInfo">
+					<button v-if="login_show" class='bottom' type='primary' @click="login" open-type="getUserInfo" withCredentials="true"
+					 lang="zh_CN" @getuserinfo="wxGetUserInfo">
 						登录
 					</button>
 					<!-- <button v-if="login_show"  class='bottom' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">登录</button> -->
@@ -73,35 +73,39 @@
 				</div>
 			</div>
 		</div>
-		<view class="qrimg">
-			<tki-qrcode ref="qrcode" val="cscscs" :size="200" :loadMake="loadMake" loadingText="二维码生成中" @result="qrR" />
+		<view class="qrimg" style="visibility:hidden;">
+			<tki-qrcode ref="qrcode" :val="routerUrl" :size="200" :loadMake="loadMake" loadingText="二维码生成中" @result="qrR" />
 		</view>
 		<div class="login_confirm" v-if="is_login">
 			<div class="l_c_body">
 				<div class='header'>
-				   <image src='../../static/img/pers_logo/denglb_logo.png'></image>
+					<image src='../../static/img/pers_logo/denglb_logo.png'></image>
 				</div>
 				<div class="cfm_title">授权登录</div>
 				<div class='content'>
-				   获得你的公开信息(昵称，头像、地区等)
+					获得你的公开信息(昵称，头像、地区等)
 				</div>
 				<button class='bottom' type='primary' open-type="getUserInfo" withCredentials="true" lang="zh_CN" @getuserinfo="wxGetUserInfo">
-				   允许
+					允许
 				</button>
 			</div>
-	   </div>
+		</div>
 	</div>
 </template>
 
 <script>
 	import tkiQrcode from "@/components/tki-qrcode/tki-qrcode.vue"
+	import {
+		config
+	} from '../../config.js'
 	export default {
 		data() {
 			return {
 				page_title: '珠海大横琴科技发展有限公司',
 				login_show: true,
 				pers_card_msg: {},
-				bgImageURL: ''
+				bgImageURL: '',
+				routerUrl: ''
 			}
 		},
 		components: {
@@ -110,7 +114,6 @@
 		onLoad(options) {
 			uni.removeStorageSync('isCanUse')
 			this.isLogin()
-			console.log(options)
 			if (options.id) {
 
 			} else {
@@ -118,6 +121,8 @@
 				let nickName = uni.getStorageSync('nickName')
 				//this.pers_card_msg=this.getLoginCardMsg(nickName)
 			}
+			var pages = getCurrentPages();
+			this.routerUrl = config.base_url + '/' + pages[0].route;
 		},
 		onShow() {
 			//this.getCardMsg();
@@ -240,10 +245,10 @@
 						_this.$api.getUserInfo('5s5ge52xg1a3g').then(res => {
 							console.log(res)
 							_this.pers_card_msg = res.data
-							if(res.data.bgImg) {
+							if (res.data.bgImg) {
 								_this.bgImageURL = res.data.bgImg
 							}
-							
+
 						})
 						console.log(code)
 					}
@@ -370,8 +375,26 @@
 				//获取相册授权
 				let _this = this
 				this.$refs.qrcode._makeCode()
-				var pages = getCurrentPages();
-				console.log(pages)
+
+				// // 生成页面的二维码
+				// uni.request({
+				// 	//注意：下面的access_token值可以不可以直接复制使用，需要自己请求获取
+				// 	url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=31_W6Z19by4SH7EyRxX4Ez4WRLc-NtbtcjMmhfJkcfb_brBfwXwegZNhKXJdI6CbxcpL4YtZi0AZNKDwJdkgPVwRMMHm4kNTqNz6yHgOQGH5L9__iDMHSTe-TjUaAsQtspqM9kjmMgS3tHkHHc1GVLjAHAPEU',
+				// 	data: {
+				// 		scene: '000',
+				// 		page: "" //这里按照需求设置值和参数   
+				// 	},
+				// 	method: "POST",
+				// 	responseType: 'arraybuffer', //设置响应类型
+				// 	success(res) {
+				// 		console.log(res)
+				// 		var src2 = uni.arrayBufferToBase64(res.data); //对数据进行转换操作
+				// 		console.log(src2)
+				// 	},
+				// 	fail(e) {
+				// 		console.log(e)
+				// 	}
+				// })
 				// uni.getSetting({
 				// 	success(res) {
 				// 	    if (!res.authSetting['scope.writePhotosAlbum']) {
@@ -390,6 +413,10 @@
 				// 	   }
 				// 	}
 				// })
+			},
+			qrR(res) {
+				console.log(res)
+				this.$refs.qrcode._saveCode()
 			},
 			saveImgToLocal(e) {
 				if (!this.operFunOk()) {
@@ -542,9 +569,9 @@
 		justify-content: center;
 		align-content: flex-start;
 	}
-	
+
 	.bgimg {
-		background-size:100% 100%;
+		background-size: 100% 100%;
 	}
 
 	.other_msg_item {
@@ -619,6 +646,7 @@
 		.oth_fun_item {
 			box-sizing: border-box;
 			padding: 20upx 20upx;
+
 			.oth_fun_btn {
 				border: 1px solid #3b7aff;
 				border-radius: 5px;
