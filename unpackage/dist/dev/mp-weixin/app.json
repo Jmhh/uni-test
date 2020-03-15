@@ -4,7 +4,8 @@
     "pages/nc_list/index",
     "pages/center/index",
     "pages/card_desc/index",
-    "pages/card_edit/index"
+    "pages/card_edit/index",
+    "pages/web_page/index"
   ],
   "subPackages": [],
   "window": {
@@ -34,6 +35,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap15.json"
+  "usingComponents": {}
 }

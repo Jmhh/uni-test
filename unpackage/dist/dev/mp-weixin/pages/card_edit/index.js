@@ -133,7 +133,41 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -197,22 +231,20 @@ var _default =
 
       eduIndex: 0,
       eduArray: ['博士后', '博士', '硕士', '学士'],
-      user: {
-        name: '',
-        edu: '',
-        pos: '',
-        addr: '',
-        e_mail: '',
-        webs: '',
-        zip_code: '',
-        pho_no: '',
-        tel_no: '' } };
+      postList: [
+      {
+        companyName: '',
+        postName: '' }],
 
+
+      imageSrc: '' };
 
   },
   onLoad: function onLoad(options) {
+    this.imageSrc = '';
     if (options.card) {
       this.pers_card_msg = JSON.parse(unescape(options.card));
+      console.log(this.pers_card_msg);
     } else if (options.id) {
       var _this = this;
       for (var i in _this.card_list) {
@@ -224,24 +256,114 @@ var _default =
     } else {
 
     }
-    this.user = _objectSpread({}, this.pers_card_msg);
-    this.eduIndex = this.eduArray.indexOf(this.user.edu);
+    if (this.pers_card_msg.postList.length > 0) {
+      this.postList = this.pers_card_msg.postList;
+    }
+    this.eduIndex = this.eduArray.indexOf(this.pers_card_msg.degree);
   },
   methods: {
     bindPickerChange: function bindPickerChange(e) {
-      console.log('picker发送选择改变，携带值为', e.target.value);
       this.eduIndex = e.target.value;
+    },
+    addPost: function addPost() {
+      this.postList.push({
+        companyName: '',
+        postName: '' });
+
     },
     formSubmit: function formSubmit(e) {
       console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value));
       var formdata = e.detail.value;
-      uni.showModal({
-        content: '表单数据内容：' + JSON.stringify(formdata),
-        showCancel: false });
+      formdata.id = this.pers_card_msg.id;
+      formdata.headImg = this.pers_card_msg.headImg;
+      formdata.bgImg = this.pers_card_msg.bgImg;
+      formdata.degree = this.eduArray[this.eduIndex];
 
+      this.postList.forEach(function (item) {
+        if (!item.userId) item.userId = '5s5ge52xg1a3g';
+      });
+      formdata.postList = this.postList;
+      console.log(formdata);
+
+      // uni.showModal({
+      //     content: '表单数据内容：' + JSON.stringify(formdata),
+      //     showCancel: false
+      // });
+
+      this.$api.updateUserInfo(formdata).then(function (res) {
+        console.log(res);
+        uni.showToast({
+          title: '更新成功',
+          icon: 'success',
+          duration: 1000 });
+
+      }).catch(function (errors) {
+        uni.showModal({
+          title: '更新失败',
+          content: errors,
+          showCancel: false });
+
+      });
     },
     formReset: function formReset(e) {
       console.log('清空数据');
+    },
+    chooseImage: function chooseImage(e) {var _this2 = this;
+      uni.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        sourceType: ['album'],
+        success: function success(res) {
+          //console.log('chooseImage success, temp path is', res)
+          var imageSrc = res.tempFilePaths[0];
+          uni.uploadFile({
+            url: 'http://121.201.18.34:8090/api/file/upload',
+            filePath: imageSrc,
+            fileType: 'image',
+            name: 'file',
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded" },
+
+            success: function success(res) {
+              console.log('uploadImage success, res is:', res);
+              uni.showToast({
+                title: '上传成功',
+                icon: 'success',
+                duration: 1000 });
+
+              _this2.pers_card_msg[e] = imageSrc;
+            },
+            fail: function fail(err) {
+              console.log('uploadImage fail', err);
+              uni.showModal({
+                content: err.errMsg,
+                showCancel: false });
+
+            } });
+
+        },
+        fail: function fail(err) {
+          console.log('chooseImage fail', err);
+
+          uni.getSetting({
+            success: function success(res) {
+              var authStatus = res.authSetting['scope.album'];
+              if (!authStatus) {
+                uni.showModal({
+                  title: '授权失败',
+                  content: 'Hello uni-app需要从您的相册获取图片，请在设置界面打开相关权限',
+                  success: function success(res) {
+                    if (res.confirm) {
+                      uni.openSetting();
+                    }
+                  } });
+
+              }
+            } });
+
+
+        } });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

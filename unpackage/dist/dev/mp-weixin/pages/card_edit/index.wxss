@@ -40,6 +40,8 @@
   font-size: 30rpx;
 }
 .card-column input {
+  line-height: 30rpx;
+  height: 30rpx;
   padding: 5rpx 10rpx;
   font-size: 30rpx;
   background-color: #fff;
@@ -50,14 +52,20 @@
 .card-btn-v button {
     margin-bottom: 20rpx;
 }
-.card-textarea {
-  background-color: #fff;
-  padding: 20rpx;
-  font-size: 30rpx;
+.postListItem {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-bottom: 10rpx;
 }
-button {
-  border-radius: 5rpx;
-  font-size: 28rpx;
-  font-weight: bold;
+.demo {
+  background: #FFF;
+  padding: 50rpx;
+}
+image.image-edit {
+  width: 100%;
+}
+image.image-edit .uni-hello-addfile {
+    text-align: center;
 }
 

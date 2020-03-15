@@ -36,6 +36,13 @@
 				"navigationBarTitleText": "编辑",
 				"backgroundColor": "#F8F8F8"
 			}
+		},
+		{
+			"path": "pages/web_page/index",
+			"style": {
+				"navigationBarTitleText": "官网",
+				"backgroundColor": "#F8F8F8"
+			}
 		}
 		// {
 		// 	"path": "pages/login/login",
@@ -81,6 +88,12 @@
 					"selectedIconPath": "static/img/tab_bar/card_list_hover.png",
 					"text": "名片夹"
 				}
+				// {
+				// 	"pagePath": "pages/card_edit/index",
+				// 	"iconPath": "static/img/tab_bar/card_list.png",
+				// 	"selectedIconPath": "static/img/tab_bar/card_list_hover.png",
+				// 	"text": "编辑"
+				// }
 			]
 	        // "midButton": {
 	        //     "width": "80px",

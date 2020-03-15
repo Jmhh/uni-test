@@ -81,6 +81,10 @@
   -webkit-flex: 0 0 120rpx;
           flex: 0 0 120rpx;
 }
+.card_img image {
+    width: 100rpx;
+    height: 100rpx;
+}
 .card_img ._img {
   width: 95rpx;
   height: 95rpx;

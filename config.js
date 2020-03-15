@@ -1,8 +1,8 @@
 let BASE_URL = ''
 if (process.env.NODE_ENV == 'development') {
-    BASE_URL = '' // 测试环境
+    BASE_URL = 'http://121.201.18.34:8090' // 测试环境
 } else {
-    BASE_URL = '' // 生产环境
+    BASE_URL = 'http://121.201.18.34:8090' // 生产环境
 }
 const config = {
 	base_url: BASE_URL,
